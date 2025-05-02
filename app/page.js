@@ -36,10 +36,10 @@ export default function ZoomRecordingsManager() {
   const toggleSelectRecording = (rec) => {
     if (selectedRecordings.includes(rec)) {
       setSelectedRecordings(selectedRecordings.filter((r) => r !== rec));
-    } else if (selectedRecordings.length < 10) {
+    } else if (selectedRecordings.length < 30) {
       setSelectedRecordings([...selectedRecordings, rec]);
     } else {
-      alert("You can only select up to 10 recordings.");
+      alert("You can only select up to 30 recordings.");
     }
   };
 
@@ -47,7 +47,6 @@ export default function ZoomRecordingsManager() {
     const link = document.createElement("a");
     link.href = url;
     link.download = filename;
-    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -67,13 +66,13 @@ export default function ZoomRecordingsManager() {
   
     const downloadNext = (index) => {
       if (index >= selectedRecordings.length) {
-        alert("All files attempted.");
+        
         setSelectedRecordings([]);
         return;
       }
   
       const rec = selectedRecordings[index];
-      const file = rec.recording_files.find((f) => f.file_type === "M4A" || f.file_type === "MP4");
+      const file = rec.recording_files.find((f) => f.file_type === "MP4");
   
       if (file) {
         const link = document.createElement("a");
